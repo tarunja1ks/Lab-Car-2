@@ -14,7 +14,21 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
 )
+find_package(gazebo REQUIRED)
 
+include_directories(
+    ${catkin_INCLUDE_DIRS}
+    ${GAZEBO_INCLUDE_DIRS}
+)
+
+link_directories(${GAZEBO_LIBRARY_DIRS})
+
+add_library(mushr_ackermann_plugin
+    plugins/mushr_ackermann_plugin.cpp)
+
+target_link_libraries(mushr_ackermann_plugin
+    ${catkin_LIBRARIES}
+    ${GAZEBO_LIBRARIES})
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 

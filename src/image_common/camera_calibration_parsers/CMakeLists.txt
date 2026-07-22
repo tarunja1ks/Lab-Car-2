@@ -7,7 +7,7 @@ find_package(PythonLibs REQUIRED)
 if(PYTHONLIBS_VERSION_STRING VERSION_LESS 3)
   find_package(Boost REQUIRED COMPONENTS filesystem python)
 else()
-  find_package(Boost REQUIRED COMPONENTS filesystem python36)
+  find_package(Boost REQUIRED COMPONENTS filesystem python38)
 endif()
 include_directories(include ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS})
 

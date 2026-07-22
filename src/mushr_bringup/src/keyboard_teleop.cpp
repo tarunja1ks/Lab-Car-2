@@ -68,8 +68,8 @@ namespace KeyboardTeleop{
             ackermann_msgs::AckermannDriveStamped msg;
             msg.header.stamp = ros::Time::now();
 
-            speed=std::max(std::min(speed,1.0f),-1.0f);
-            steering=std::max(std::min(steering,1.0f),-1.0f);
+            //speed=std::max(std::min(speed,1.0f),-1.0f);
+            //steering=std::max(std::min(steering,1.0f),-1.0f);
             msg.drive.speed = speed;
             msg.drive.steering_angle = steering;
             ackermann_pub.publish(msg);

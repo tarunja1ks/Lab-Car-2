@@ -22,7 +22,7 @@ namespace KeyboardTeleop{
             void disableRawMode();
             float speed=0.0;
             float steering=0.0;
-            float drive_speed=0.5; // m/s commanded while w/s is held
+            float drive_speed=10.0; // m/s commanded while w/s is held
             float turn_angle=0.34; // rad commanded while a/d is held
             int key_timeout_cycles=18; // ~0.6s at 30Hz, must outlast the OS key auto-repeat delay
             termios orig_termios;

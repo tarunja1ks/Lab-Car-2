@@ -3,7 +3,8 @@
 #include <ros/ros.h>
 #include <string>
 #include <sstream> 
-#include <std_msgs/String.h>
+//#include <std_msgs/String.h>
+#include <ackermann_msgs/AckermannDriveStamped.h>
 #include <std_msgs/Float64.h>
 #include <std_msgs/Float64MultiArray.h>
 
@@ -82,7 +83,7 @@ namespace gazebo{
         }
 
         // setting up publisher for the steering 
-        this->sub=this->nodeHandler.subscribe<std_msgs::String>("/ackermann_cmd",1,&mushr_ackermann_plugin::onCommand, this);
+        this->sub=this->nodeHandler.subscribe<ackermann_msgs::AckermannDriveStamped>("/ackermann_cmd",1,&mushr_ackermann_plugin::onCommand, this);
         this->steer_pub = this->nodeHandler.advertise<std_msgs::Float64>("/steering_angle",1);
 
         // setting up the steering pid
@@ -95,11 +96,15 @@ namespace gazebo{
         
         
       }
-      void onCommand(const std_msgs::String::ConstPtr &msg){
-        std::stringstream ss(msg->data);
-        ss >> this->speed>> this->steering_angle;
-
-      }
+     // void onCommand(const std_msgs::String::ConstPtr &msg){
+     //   std::stringstream ss(msg->data);
+     //   ss >> this->speed>> this->steering_angle;
+     // }
+      void onCommand(const ackermann_msgs::AckermannDriveStamped::ConstPtr &msg)
+	  {
+		speed = msg->drive.speed;
+		steering_angle = msg->drive.steering_angle;
+	  }
       void OnUpdate(){
         ros::spinOnce();
 

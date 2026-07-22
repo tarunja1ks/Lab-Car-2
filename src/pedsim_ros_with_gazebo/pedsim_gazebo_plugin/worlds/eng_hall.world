@@ -4280,7 +4280,7 @@
     </model>
     
 
-            <plugin name="ActorPosesPlugin" filename="libActorPosesPlugin.dylib">
+            <plugin name="ActorPosesPlugin" filename="libActorPosesPlugin.so">
         </plugin>
     
     

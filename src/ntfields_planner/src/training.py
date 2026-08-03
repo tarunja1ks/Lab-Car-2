@@ -1,8 +1,17 @@
-import torch.nn as nn
-import torch
+# import torch.nn as nn
+# import torch
+
+import mlx.core as mlx
+import mlx.nn as nn
+
+# code skeleton thing
+
+
+#convert the .map files into octomap and make sure itll be portable into irl robot and the gazebo sim
 
 # from octomap get the voxels for the obstacles and for free spaces
 
+# no need to do the g(q) encoding and pass voxels for point cloud since its a mobile robot so the point cloud around it isnt too serious like an arm
 # using the voxels pass through a neutral network of the feature maps and build the W matrix which is N*N*N*(k+1)
 
 #raw configuration start
@@ -35,16 +44,31 @@ class Encoder():
         return self.Encoder_Model(q)
     
     def symmetric_operator(self,qs,qg):
-        return torch.maximum(qs,qg) 
+        return mlx.maximum(qs,qg) 
         
-class NTField:
+class NTField(nn.module):
     def __init__(self):
-        print("thing")
-        self.model=nn.Sequential(
-            
-        )
+        self.model=nn.Sequential()
         
-      
+        self.constant_speed=20.0 # max speed place holder for now
+        self.dmin=1
+        self.dmax=0
+        
+        
+    def speed_groundtruth(self,q):
+        return self.constant_speed/self.dmax*mlx.clip(self.dmin,self.dmax)
+    
+        
+    def eikonal_loss(self,QS_ground, QG_ground, QS_predict, QG_predict):
+        return (mlx.abs(1-mlx.sqrt(QS_ground/QS_predict))+mlx.abs(1-mlx.sqrt(QG_ground/QG_predict))+mlx.abs(1-mlx.sqrt(QS_predict/QS_ground))+mlx.abs(1-mlx.sqrt(QG_predict/QG_ground))).mean()
+
+    def compute_time(self,q):
+        
+        return 0
     
 if __name__ == "__main__":
-    print("inside main")
+    
+    epochs=1000
+    for epoch in range(epochs):
+        # do all the loss and minibatching
+        

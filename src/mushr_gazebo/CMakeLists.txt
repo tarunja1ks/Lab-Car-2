@@ -19,6 +19,7 @@ find_package(SDL2 REQUIRED)
 find_package(gazebo REQUIRED)
 
 find_package(octomap REQUIRED)
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS}")
 
 catkin_package(
@@ -61,6 +62,10 @@ target_link_libraries(lidar_conversion ${catkin_LIBRARIES} Eigen3::Eigen )
 add_executable(mapping_node src/mapping_node.cpp)
 add_dependencies(mapping_node ${catkin_EXPORTED_TARGETS})
 target_link_libraries(mapping_node ${catkin_LIBRARIES} ${OCTOMAP_LIBRARIES})
+
+add_executable(snapshot_node src/snapshot_node.cpp)
+add_dependencies(snapshot_node ${catkin_EXPORTED_TARGETS})
+target_link_libraries(snapshot_node ${catkin_LIBRARIES} ${OCTOMAP_LIBRARIES})
 
 
 

@@ -12,18 +12,18 @@
     <arg name="world_name" value="$(find pedsim_gazebo_plugin)/worlds/eng_hall.world"/>
   </include>
 	
-  <node pkg="pedsim_gazebo_plugin" type="spawn_pedsim_agents.py" name="spawn_pedsim_agents"  output="screen">
-   </node>
+  <!-- <node pkg="pedsim_gazebo_plugin" type="spawn_pedsim_agents.py" name="spawn_pedsim_agents"  output="screen">
+   </node> -->
 
   <!-- pedsim_simulator publishes /pedsim_simulator/simulated_agents, which
        spawn_pedsim_agents.py listens on to spawn the people in gazebo.
        Without it, no agents ever appear. -->
-  <include file="$(find pedsim_simulator)/launch/simulator.launch">
+  <!-- <include file="$(find pedsim_simulator)/launch/simulator.launch">
     <arg name="scene_file" value="$(find pedsim_simulator)/scenarios/eng_hall.xml"/>
     <arg name="with_robot" value="false"/>
     <arg name="update_rate" value="55.0"/>
     <arg name="simulation_factor" value="1.0"/>
-  </include>
+  </include> -->
 
 	<param name="robot_description" command="cat $(find mushr_description)/urdf/racecar.urdf"/>
 

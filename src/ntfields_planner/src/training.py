@@ -45,6 +45,11 @@ class Encoder():
     
     def symmetric_operator(self,qs,qg):
         return mlx.maximum(qs,qg) 
+    
+    
+    # build an encoder to create map signatures
+    
+    
         
 class NTField(nn.module):
     def __init__(self):

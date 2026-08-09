@@ -10,6 +10,7 @@
 #include <visualization_msgs/MarkerArray.h>
 #include <tf/transform_listener.h>
 #include <octomap/octomap.h>
+#include <octomap_msgs/conversions.h>
 
 class Mapper {
   ros::Subscriber sub_;
@@ -21,7 +22,8 @@ class Mapper {
 public:
   Mapper(ros::NodeHandle& nh) : tree_(0.05), map_frame_("map") {
     sub_ = nh.subscribe("/cloud", 5, &Mapper::cb, this);
-    pub_ = nh.advertise<visualization_msgs::MarkerArray>("/octomap_markers", 1, true);
+    pub_rviz = nh.advertise<visualization_msgs::MarkerArray>("/octomap_markers", 1, true);
+    pub_octree = nh.advertise<::MarkerArray>("/octomap", 1, true);
   }
 
   void cb(const sensor_msgs::PointCloud2::ConstPtr& msg) {
@@ -47,6 +49,12 @@ public:
     }
 
     tree_.insertPointCloud(pc, origin);
+
+    //publishing the octomap tree
+    octomap_msgs::Octomap oct;
+    octomap_msgs::binaryMapToMsg(tree_,oct);
+
+    //publishing rviz
     publishMarkers();
   }
 
@@ -71,7 +79,7 @@ public:
     }
 
     arr.markers.push_back(m);
-    pub_.publish(arr);
+    pub_rviz.publish(arr);
   }
 };
 

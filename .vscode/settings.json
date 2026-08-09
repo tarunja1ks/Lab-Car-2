@@ -1,3 +1,5 @@
 {
-    "cmake.sourceDirectory": "/Users/tarunjaikumar/Documents/Robotics-UCSD/ERL-Racecar/catkin_ws/build/catkin_generated/metapackages/vesc"
+    "cmake.sourceDirectory": "/Users/tarunjaikumar/Documents/Robotics-UCSD/ERL-Racecar/catkin_ws/build/catkin_generated/metapackages/vesc",
+    "python-envs.defaultEnvManager": "ms-python.python:conda",
+    "python-envs.defaultPackageManager": "ms-python.python:conda"
 }

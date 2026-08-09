@@ -105,7 +105,7 @@ namespace gazebo{
         this->lastUpdateTime=this->model->GetWorld()->SimTime();
 
         // setting up publisher for wheel velocities
-        this->wheel_vel_pub=this->nodeHandler.advertise<std_msgs::Float64MultiArray>("/odom",1);
+        this->wheel_vel_pub =this->nodeHandler.advertise<std_msgs::Float64MultiArray>("/odom",1);
         
         
         

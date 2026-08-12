@@ -22,6 +22,14 @@ class Snapshot{
     void cb_snapshot(const std_msgs::String::ConstPtr &msg){
         if(!octomap_scan) return;
         octomap_scan->writeBinary("/Users/tarunjaikumar/Documents/Robotics-UCSD/ERL-Racecar/catkin_ws/src/mushr_gazebo/exports/octree.bt");
+        std::ofstream free_("/Users/tarunjaikumar/Documents/Robotics-UCSD/ERL-Racecar/catkin_ws/src/mushr_gazebo/exports/free.txt");
+        size_t n = 0;
+        for (auto it = octomap_scan->begin_leafs(), end = octomap_scan->end_leafs(); it != end; ++it) {
+            if (octomap_scan->isNodeOccupied(*it)) continue;
+            free_ << it.getX() << " " << it.getY() << " " << it.getZ() << " " << it.getSize() << "\n";
+            ++n;
+        }
+        free_.close();
     }
     void cb_octomap(const octomap_msgs::Octomap::ConstPtr &msg){
         octomap::AbstractOcTree* t = octomap_msgs::binaryMsgToMap(*msg);

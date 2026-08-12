@@ -44,7 +44,7 @@ class NTField(nn.Module):
         )
         self.constant_speed=1.0 
         self.dmin=0.2
-        self.dmax=10
+        self.dmax=5.5
         self.kdtree=kdtree
         
     def symmetric_operator(self,f_qs,f_qg):

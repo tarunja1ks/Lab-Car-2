@@ -63,6 +63,10 @@ add_executable(mapping_node src/mapping_node.cpp)
 add_dependencies(mapping_node ${catkin_EXPORTED_TARGETS})
 target_link_libraries(mapping_node ${catkin_LIBRARIES} ${OCTOMAP_LIBRARIES})
 
+add_executable(planning_node src/planning_node.cpp)
+add_dependencies(planning_node ${catkin_EXPORTED_TARGETS})
+target_link_libraries(planning_node ${catkin_LIBRARIES} ${OCTOMAP_LIBRARIES})
+
 add_executable(snapshot_node src/snapshot_node.cpp)
 add_dependencies(snapshot_node ${catkin_EXPORTED_TARGETS})
 target_link_libraries(snapshot_node ${catkin_LIBRARIES} ${OCTOMAP_LIBRARIES})
